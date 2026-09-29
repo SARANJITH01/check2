@@ -1,0 +1,115 @@
+{% include "admin_header.html" %}
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Header -->
+    <header class="header">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="admin-table-search" placeholder="Search complaints by user, title, issue...">
+        </div>
+        <div class="header-actions">
+            <div class="user-menu">
+                <div class="user-avatar">A</div>
+                <div>
+                    <div class="user-menu-text">Administrator</div>
+                    <div style="font-size: 11px; color: #64748b;">Superuser</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="content-header">
+            <h2>User Complaints Resolution Desk</h2>
+            <p>Review system issue reports submitted by users and dispatch replies directly.</p>
+        </div>
+
+        {% if messages %}
+        <div style="margin-bottom: 24px;">
+            {% for message in messages %}
+            <div style="padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46;">
+                <i class="fas fa-circle-check"></i>
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="table-card">
+            <div class="table-header">
+                <h3>
+                    <i class="fas fa-clipboard-list text-primary"></i>
+                    All Filed Complaints
+                </h3>
+                <span style="background: #fef2f2; color: #dc2626; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 9999px; border: 1px solid #fecaca;">
+                    {{ a|length }} Total Complaints
+                </span>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;">#</th>
+                            <th>Reported By</th>
+                            <th>Issue Title</th>
+                            <th>Description</th>
+                            <th style="width: 120px;">Date</th>
+                            <th style="min-width: 260px;">Resolution / Reply</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in a %}
+                        <tr>
+                            <td><strong>{{ forloop.counter }}</strong></td>
+                            <td style="font-weight: 600; color: #0f172a;">
+                                <i class="fas fa-user-circle text-primary me-1"></i>
+                                {{ i.USER_PROFILE.first_name }} {{ i.USER_PROFILE.last_name }}
+                            </td>
+                            <td style="font-weight: 600; color: #1e293b;">{{ i.title }}</td>
+                            <td style="color: #475569; max-width: 280px; font-size: 13.5px; line-height: 1.5;">
+                                {{ i.description }}
+                            </td>
+                            <td style="white-space: nowrap; color: #64748b; font-size: 13px;">
+                                <i class="fas fa-calendar-days me-1"></i> {{ i.date }}
+                            </td>
+                            <td>
+                                {% if i.reply == 'pending' %}
+                                <form method="post" class="inline-reply-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ i.id }}">
+                                    <input type="text" name="reply" class="inline-reply-input" placeholder="Type resolution..." required style="flex: 1;">
+                                    <button type="submit" name="submit" value="Send" class="inline-reply-btn">
+                                        <i class="fas fa-reply"></i> Reply
+                                    </button>
+                                </form>
+                                {% else %}
+                                <div>
+                                    <span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 9999px; font-size: 12px; font-weight: 700; color: #047857; margin-bottom: 4px;">
+                                        <i class="fas fa-check-circle"></i> Resolved
+                                    </span>
+                                    <div style="font-size: 13px; color: #334155; margin-top: 4px;">
+                                        {{ i.reply }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 40px; color: #94a3b8;">
+                                <i class="fas fa-clipboard-check" style="font-size: 36px; display: block; margin-bottom: 10px;"></i>
+                                No complaints found in the system.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% include "admin_footer.html" %}

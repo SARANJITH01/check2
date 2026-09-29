@@ -1,0 +1,100 @@
+{% include 'public_header.html' %}
+
+<div class="page-hero-container" style="max-width: 820px;">
+    <div class="webeye-card">
+        <div class="webeye-card-header">
+            <div class="icon-badge">
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <h2>Create Your Account</h2>
+            <p>Join WEB EYE and experience next-generation touchless computer navigation powered by AI.</p>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert-custom-banner {% if message.tags == 'error' %}error{% else %}success{% endif %}">
+            <i class="fas {% if message.tags == 'error' %}fa-circle-exclamation{% else %}fa-circle-check{% endif %}"></i>
+            <span>{{ message }}</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <form method="post" class="webeye-form">
+            {% csrf_token %}
+            
+            <div class="form-grid">
+                <!-- First Name -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="fname"><i class="fas fa-user me-1 text-muted"></i> First Name</label>
+                    <input type="text" id="fname" name="fname" class="form-input-custom" placeholder="e.g. Alex" required>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="lname"><i class="fas fa-user me-1 text-muted"></i> Last Name</label>
+                    <input type="text" id="lname" name="lname" class="form-input-custom" placeholder="e.g. Morgan" required>
+                </div>
+
+                <!-- Email Address -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="email"><i class="fas fa-envelope me-1 text-muted"></i> Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input-custom" placeholder="alex@example.com" required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="phone"><i class="fas fa-phone me-1 text-muted"></i> Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-input-custom" placeholder="+91 98765 43210" required>
+                </div>
+
+                <!-- Location / Place -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="place"><i class="fas fa-location-dot me-1 text-muted"></i> Place / City</label>
+                    <input type="text" id="place" name="place" class="form-input-custom" placeholder="e.g. New York, London, Kochi" required>
+                </div>
+
+                <!-- Gender Selector -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom"><i class="fas fa-venus-mars me-1 text-muted"></i> Gender</label>
+                    <div class="gender-selector">
+                        <div class="gender-pill">
+                            <input type="radio" id="gender-male" name="gender" value="Male" checked>
+                            <label for="gender-male"><i class="fas fa-mars"></i> Male</label>
+                        </div>
+                        <div class="gender-pill">
+                            <input type="radio" id="gender-female" name="gender" value="Female">
+                            <label for="gender-female"><i class="fas fa-venus"></i> Female</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Username -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="username"><i class="fas fa-at me-1 text-muted"></i> Username</label>
+                    <input type="text" id="username" name="username" class="form-input-custom" placeholder="Choose a unique username" required autocomplete="username">
+                </div>
+
+                <!-- Password -->
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="password"><i class="fas fa-lock me-1 text-muted"></i> Password</label>
+                    <input type="password" id="password" name="password" class="form-input-custom" placeholder="Create a strong password" required autocomplete="new-password">
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button type="submit" name="submit" value="Register" class="btn-webeye-primary">
+                    <i class="fas fa-user-plus"></i> Complete Registration
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-muted);">
+                Already have an account? 
+                <a href="/login" style="color: var(--primary); font-weight: 700; text-decoration: none;">
+                    Sign in here <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include 'footer.html' %}

@@ -1,0 +1,19 @@
+GESTURE CONTOL
+
+GESTURE 1: Index Finger = Move Cursor ---
+GESTURE 2: Index + Middle = Click ---  (Move cursor while in click mode)
+GESTURE 3: Fist (no fingers) = Drag ---
+GESTURE 4: Pinch (Thumb + Index close) = Volume/Brightness Control --- (Vertical movement controls volume)(Horizontal movement controls brightness)
+GESTURE 5: Peace Sign (Index + Middle spread) = Right Click ---
+GESTURE 6: All fingers up = Scroll ---
+
+[imp : v sign with index finger and middle finger move cursor, close the v sign index and middle finger join toger will click]
+
+
+**********************************************************************************************************************************
+
+EYE CONTROLL
+
+Left eye blink -- Left click
+Right eye blink -- Right click
+blink both eye -- select

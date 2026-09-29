@@ -1,0 +1,81 @@
+{% include "admin_header.html" %}
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Header -->
+    <header class="header">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="admin-table-search" placeholder="Search user feedbacks and suggestions...">
+        </div>
+        <div class="header-actions">
+            <div class="user-menu">
+                <div class="user-avatar">A</div>
+                <div>
+                    <div class="user-menu-text">Administrator</div>
+                    <div style="font-size: 11px; color: #64748b;">Superuser</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="content-header">
+            <h2>User Reviews & Feedback</h2>
+            <p>Direct sentiments, feature requests, and system ratings from active users.</p>
+        </div>
+
+        <div class="table-card">
+            <div class="table-header">
+                <h3>
+                    <i class="fas fa-comment-dots text-primary"></i>
+                    All Submitted Feedback
+                </h3>
+                <span style="background: #f5f3ff; color: #7c3aed; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 9999px; border: 1px solid #ddd6fe;">
+                    {{ a|length }} Total Reviews
+                </span>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 70px;">#</th>
+                            <th>User Name</th>
+                            <th>Feedback / Review Note</th>
+                            <th style="width: 150px;">Date Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in a %}
+                        <tr>
+                            <td><strong>{{ forloop.counter }}</strong></td>
+                            <td style="font-weight: 600; color: #0f172a; white-space: nowrap;">
+                                <i class="fas fa-user-circle text-primary me-1"></i>
+                                {{ i.USER_PROFILE.first_name }} {{ i.USER_PROFILE.last_name }}
+                            </td>
+                            <td style="color: #334155; font-size: 14px; line-height: 1.6;">
+                                <i class="fas fa-quote-left text-muted me-2" style="font-size: 12px;"></i>
+                                {{ i.feedback }}
+                            </td>
+                            <td style="white-space: nowrap; color: #64748b; font-size: 13px;">
+                                <i class="fas fa-calendar-days me-1"></i> {{ i.date }}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 40px; color: #94a3b8;">
+                                <i class="fas fa-comment-slash" style="font-size: 36px; display: block; margin-bottom: 10px;"></i>
+                                No feedback submitted yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% include "admin_footer.html" %}

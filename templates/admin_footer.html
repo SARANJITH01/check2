@@ -1,0 +1,36 @@
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+
+        // Highlight active sidebar item based on current URL path
+        document.addEventListener('DOMContentLoaded', function() {
+            const path = window.location.pathname;
+            if (path.includes('admin_home')) {
+                document.getElementById('nav-home')?.classList.add('active');
+            } else if (path.includes('admin_view_users')) {
+                document.getElementById('nav-users')?.classList.add('active');
+            } else if (path.includes('admin_view_complaints')) {
+                document.getElementById('nav-complaints')?.classList.add('active');
+            } else if (path.includes('admin_view_feedback')) {
+                document.getElementById('nav-feedback')?.classList.add('active');
+            }
+
+            // Real-time table search filter
+            const searchInput = document.getElementById('admin-table-search');
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const query = e.target.value.toLowerCase();
+                    const rows = document.querySelectorAll('tbody tr');
+                    rows.forEach(row => {
+                        const text = row.textContent.toLowerCase();
+                        row.style.display = text.includes(query) ? '' : 'none';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

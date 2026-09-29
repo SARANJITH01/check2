@@ -1,0 +1,138 @@
+{% include "admin_header.html" %}
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Header -->
+    <header class="header">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="admin-table-search" placeholder="Search recent users, complaints, records...">
+        </div>
+        <div class="header-actions">
+            <div class="user-menu">
+                <div class="user-avatar">A</div>
+                <div>
+                    <div class="user-menu-text">Administrator</div>
+                    <div style="font-size: 11px; color: #64748b;">Superuser</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="content-header">
+            <h2>System Overview</h2>
+            <p>Real-time monitor for registered users, active complaints, and feedback submissions.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value">{{ a }}</div>
+                        <div class="stat-change">
+                            <i class="fas fa-users-viewfinder text-primary"></i> Active community
+                        </div>
+                    </div>
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Pending Complaints</div>
+                        <div class="stat-value" style="color: {% if b > 0 %}#dc2626{% else %}#059669{% endif %};">{{ b }}</div>
+                        <div class="stat-change" style="color: {% if b > 0 %}#dc2626{% else %}#059669{% endif %};">
+                            <i class="fas {% if b > 0 %}fa-clock{% else %}fa-check-circle{% endif %}"></i> 
+                            {% if b > 0 %}Requires review{% else %}All caught up{% endif %}
+                        </div>
+                    </div>
+                    <div class="stat-icon green">
+                        <i class="fas fa-circle-exclamation"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Feedback Notes</div>
+                        <div class="stat-value">{{ c }}</div>
+                        <div class="stat-change">
+                            <i class="fas fa-thumbs-up text-purple"></i> User satisfaction reviews
+                        </div>
+                    </div>
+                    <div class="stat-icon purple">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Users Table -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3>
+                    <i class="fas fa-user-clock text-primary"></i>
+                    Recently Registered Users
+                </h3>
+                <a href="/admin_view_users" style="font-size: 13.5px; font-weight: 700; color: var(--primary); text-decoration: none;">
+                    View All Users <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 70px;">#</th>
+                            <th>Full Name</th>
+                            <th>Email Address</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in d %}
+                        <tr>
+                            <td><strong>{{ forloop.counter }}</strong></td>
+                            <td style="font-weight: 600; color: #0f172a;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 32px; height: 32px; border-radius: 8px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">
+                                        {{ i.first_name|first }}
+                                    </div>
+                                    <span>{{ i.first_name }} {{ i.last_name }}</span>
+                                </div>
+                            </td>
+                            <td><a href="mailto:{{ i.email }}" style="color: #475569; text-decoration: none;"><i class="fas fa-envelope me-1 text-muted"></i> {{ i.email }}</a></td>
+                            <td><span style="color: #475569;"><i class="fas fa-phone me-1 text-muted"></i> {{ i.phone }}</span></td>
+                            <td><span style="color: #475569;"><i class="fas fa-location-dot me-1 text-muted"></i> {{ i.place }}</span></td>
+                            <td>
+                                <span class="badge-pill" style="background: {% if i.gender == 'Male' %}#eff6ff; color: #1e40af; border: 1px solid #bfdbfe;{% else %}#fdf2f8; color: #9d174d; border: 1px solid #fbcfe8;{% endif %}">
+                                    {{ i.gender }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 32px; color: #94a3b8;">
+                                <i class="fas fa-users-slash" style="font-size: 32px; display: block; margin-bottom: 8px;"></i>
+                                No users registered yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% include "admin_footer.html" %}

@@ -1,0 +1,206 @@
+{% include "user_header.html" %}
+
+<style>
+    .user-hub-hero {
+        background: linear-gradient(135deg, #0b1120 0%, #1e1b4b 100%);
+        color: #ffffff;
+        padding: 60px 0 70px;
+        position: relative;
+    }
+
+    .user-hub-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(99, 102, 241, 0.2);
+        border: 1px solid rgba(99, 102, 241, 0.4);
+        color: #a5b4fc;
+        padding: 5px 14px;
+        border-radius: var(--radius-full);
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+
+    .user-hub-title {
+        font-size: 2.6rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: #ffffff;
+    }
+
+    .user-hub-subtitle {
+        font-size: 1.15rem;
+        color: #94a3b8;
+        max-width: 600px;
+        margin: 0;
+    }
+
+    .hub-grid-container {
+        max-width: 1140px;
+        margin: -40px auto 100px;
+        padding: 0 24px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .hub-card {
+        background: #ffffff;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-md);
+        padding: 34px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        height: 100%;
+        text-decoration: none !important;
+    }
+
+    .hub-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+        border-color: #cbd5e1;
+    }
+
+    .hub-icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    .hub-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 8px;
+    }
+
+    .hub-card-desc {
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+
+    .hub-card-link {
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: gap 0.2s ease;
+    }
+
+    .hub-card:hover .hub-card-link {
+        gap: 10px;
+    }
+
+    .tips-card {
+        background: #ffffff;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-sm);
+        padding: 32px;
+        margin-top: 40px;
+    }
+</style>
+
+<!-- User Hero Banner -->
+<div class="user-hub-hero">
+    <div class="container">
+        <div class="user-hub-pill">
+            <i class="fas fa-circle-check text-success"></i> Account Authenticated
+        </div>
+        <h1 class="user-hub-title">Welcome to Your Workspace</h1>
+        <p class="user-hub-subtitle">Launch virtual mouse controllers, file tracking inquiries, or share your feedback with our system engineers.</p>
+    </div>
+</div>
+
+<div class="hub-grid-container">
+    <div class="row g-4">
+        <!-- Card 1: Virtual Mouse -->
+        <div class="col-lg-4 col-md-6">
+            <a href="/mouse_control" class="hub-card">
+                <div>
+                    <div class="hub-icon-circle" style="background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <h3 class="hub-card-title">Virtual Mouse Control</h3>
+                    <p class="hub-card-desc">
+                        Activate Eye Gaze tracking or Hand Gesture recognition to control your OS cursor, clicks, drags, volume, and brightness.
+                    </p>
+                </div>
+                <div class="hub-card-link" style="color: var(--primary);">
+                    Launch Controllers <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card 2: Complaints -->
+        <div class="col-lg-4 col-md-6">
+            <a href="/user_send_complaint" class="hub-card">
+                <div>
+                    <div class="hub-icon-circle" style="background: linear-gradient(135deg, #ef4444 0%, #f97316 100%); box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);">
+                        <i class="fas fa-circle-exclamation"></i>
+                    </div>
+                    <h3 class="hub-card-title">Help & Complaints</h3>
+                    <p class="hub-card-desc">
+                        Report any issues with landmark tracking, sensitivity, or camera connectivity to receive support and status updates.
+                    </p>
+                </div>
+                <div class="hub-card-link" style="color: #ef4444;">
+                    File an Issue <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Card 3: Feedback -->
+        <div class="col-lg-4 col-md-6">
+            <a href="/user_send_feedback" class="hub-card">
+                <div>
+                    <div class="hub-icon-circle" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3 class="hub-card-title">User Feedback</h3>
+                    <p class="hub-card-desc">
+                        Tell us what you love and what we can improve. Your reviews directly influence new gesture additions and algorithm tuning.
+                    </p>
+                </div>
+                <div class="hub-card-link" style="color: #8b5cf6;">
+                    Share Feedback <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Start Tips -->
+    <div class="tips-card">
+        <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h4 style="margin: 0; font-size: 18px; color: #0f172a;">Quick Pro-Tips for Best Accuracy</h4>
+        </div>
+        <div class="row g-3" style="font-size: 14px; color: #475569;">
+            <div class="col-md-4">
+                <i class="fas fa-sun text-warning me-2"></i> <strong>Ambient Lighting:</strong> Avoid strong backlighting behind your head.
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-arrows-to-eye text-primary me-2"></i> <strong>Eye Distance:</strong> Maintain 40–60 cm distance from your webcam.
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-keyboard text-info me-2"></i> <strong>Quit Anytime:</strong> Press <kbd style="background: #e2e8f0; color: #334155; padding: 2px 6px; border-radius: 4px;">ESC</kbd> to immediately release camera feed.
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}
